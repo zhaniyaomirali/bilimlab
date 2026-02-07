@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<title>BILIMLab</title>
+<link href="images/title.jpeg" rel="stylesheet">
+<style>
+body { margin:0; font-family:'Roboto',Arial,sans-serif; background:#f4f8f6; text-align:center; }
+header{ background:url(images/title.jpeg) no-repeat center center; background-size:cover; color:white; padding:60px 20px; text-shadow:2px 2px 4px black; }
+header h1{ font-size:120px; margin:0; }
+h2{
+    font-size:40px;   
+    font-weight:bold;
+}
+
+.container{ display:flex; justify-content:center; gap:50px; margin-top:50px; flex-wrap:wrap; }
+.card{ background:white; width:300px; padding:20px; border-radius:15px; box-shadow:0 0 15px #ccc; }
+.card img{ width:100%; border-radius:10px; }
+.card h3{ font-size:40px; font-weight:bold; margin:15px 0 10px 0; }
+button{ margin-top:35px; padding:25px 40px; background:#2e8b57; border:none; color:white; font-size:20px; font-weight:bold; border-radius:10px; cursor:pointer; transition:0.3s; }
+button:hover{ background:#246b45; }
+section{ display:none; padding:40px 20px; }
+section button{ width:400px; max-width:90%; display:block; margin:10px auto; padding:15px 30px; font-size:22px; font-weight:bold; border-radius:10px; background-color:#2e8b57; color:white; border:none; cursor:pointer; }
+.quiz-container{ display:flex; gap:30px; justify-content:center; flex-wrap:wrap; }
+.puzzle{ width:400px; display:grid; grid-template-columns:repeat(2,1fr); gap:5px; }
+.puzzle div{ height:120px; background:#ccc; border-radius:6px; overflow:hidden; }
+.puzzle img{ width:100%; height:100%; object-fit:cover; display:none; }
+.question{ font-size:32px; font-weight:bold; margin-bottom:25px; max-width:800px; text-align:left; }
+.options label {
+    display:block;
+    margin-bottom:25px;
+    font-size:25px;
+    padding:10px;
+    border-radius:6px;
+}
+.correct {
+    background-color:#4ac84e;
+    font-weight:bold; /* жирный */
+}
+
+.wrong {
+    background-color:#f14e5e;
+    font-weight:bold; /* жирный */
+}
+
+.quiz-container > div:nth-child(2) {
+    text-align: left; 
+}
+#score1,#score2,#score3,#score4{ font-size:30px; text-align:center; margin-top:40px; display:none; }
+</style>
+</head>
+<body>
+
+<header><h1>BILIMLab</h1></header>
+
+<section id="home">
+<div class="container">
+<div class="card">
+<img src="images/bio.png" alt="Bio">
+<h3>Биология</h3>
+<button onclick="openPage('bio')">Таңдау</button>
+</div>
+<div class="card">
+<img src="images/chem.png" alt="Chem">
+<h3>Химия</h3>
+<button onclick="openPage('chem')">Таңдау</button>
+</div>
+</div>
+</section>
+<footer style="margin-top:60px;text-align:center;color:#666;font-size:16px;">
+© 2026 • Author: Omirali Zhaniya
+</footer>
+
+<section id="bio">
+<h2>Биология тақырыптары</h2>
+<button onclick="openPage('bio1')">1. Жүйке жүйесінің бөлімдері. Жұлын</button>
+<button onclick="openPage('bio2')">2. Рефлекс және рефлекс доғасы</button>
+<button onclick="openPage('home')">← Артқа</button>
+</section>
+
+<section id="bio1">
+<h2>Жүйке жүйесінің бөлімдері. Жұлын</h2>
+<div class="quiz-container">
+  <div class="puzzle" id="puzzle1">
+    <div data-index="0"><img src="images/biotest1/photo1.jpg"></div>
+    <div data-index="1"><img src="images/biotest1/photo2.jpg.webp"></div>
+    <div data-index="2"><img src="images/biotest1/photo3.jpg"></div>
+    <div data-index="3"><img src="images/biotest1/photo4.jpg"></div>
+    <div data-index="4"><img src="images/biotest1/photo5.webp"></div>
+    <div data-index="5"><img src="images/biotest1/photo6.webp"></div>
+    <div data-index="6"><img src="images/biotest1/photo7.webp"></div>
+    <div data-index="7"><img src="images/biotest1/photo8.webp"></div>
+    <div data-index="8"><img src="images/biotest1/photo9.jpg"></div>
+    <div data-index="9"><img src="images/biotest1/photo10.jpg"></div>
+  </div>
+  <div>
+    <div id="question1" class="question"></div>
+    <div id="options1" class="options"></div>
+    <button onclick="check1()">Тексеру</button>
+    <button onclick="next1()" id="nextBtn1" disabled>Келесі</button>
+    <p id="result1"></p>
+  </div>
+</div>
+<div id="score1"></div>
+<button onclick="openPage('bio')">← Артқа</button>
+</section>
+
+<section id="bio2">
+<h2>Рефлекс және рефлекс доғасы</h2>
+<div class="quiz-container">
+  <div class="puzzle" id="puzzle2">
+    <div data-index="0"><img src=images/biotest2/bio2test1.jpg></div>
+    <div data-index="1"><img src=images/biotest2/bio2test2.jpg></div>
+    <div data-index="2"><img src=images/biotest2/bio2test3.jpg></div>
+    <div data-index="3"><img src=images/biotest2/bio2test4.jpg></div>
+    <div data-index="4"><img src=images/biotest2/bio2test5.jpg></div>
+    <div data-index="5"><img src=images/biotest2/bio2test6.jpg></div>
+    <div data-index="6"><img src=images/biotest2/bio2test7.jpg></div>
+    <div data-index="7"><img src=images/biotest2/bio2test8.jpg></div>
+    <div data-index="8"><img src=images/biotest2/bio2test9.jpg></div>
+    <div data-index="9"><img src=images/biotest2/bio2test10.jpg></div>
+  </div>
+  <div>
+    <div id="question2" class="question"></div>
+    <div id="options2" class="options"></div>
+    <button onclick="check2()">Тексеру</button>
+    <button onclick="next2()" id="nextBtn2" disabled>Келесі</button>
+    <p id="result2"></p>
+  </div>
+</div>
+<div id="score2"></div>
+<button onclick="openPage('bio')">← Артқа</button>
+</section>
+
+<section id="chem">
+<h2>Химия тақырыптары</h2>
+<button onclick="openPage('chem1')">1. Химиялық элементтердің табиғи топтары және олардың қасиеттері</button>
+<button onclick="openPage('chem2')">2. Периодтық жүйенің құрылымы</button>
+<button onclick="openPage('home')">← Артқа</button>
+</section>
+
+<section id="chem1">
+<h2>Химиялық элементтердің табиғи топтары және олардың қасиеттері</h2>
+<div class="quiz-container">
+  <div class="puzzle" id="puzzle3">
+    <div data-index="0"><img src="images/chem1/pt1.jpg"></div>
+    <div data-index="1"><img src="images/chem1/pt2.jpg"></div>
+    <div data-index="2"><img src="images/chem1/pt3.jpg"></div>
+    <div data-index="3"><img src="images/chem1/pt4.jpg"></div>
+    <div data-index="4"><img src="images/chem1/pt5.jpg"></div>
+    <div data-index="5"><img src="images/chem1/pt6.png"></div>
+    <div data-index="6"><img src="images/chem1/pt7.jpg"></div>
+    <div data-index="7"><img src="images/chem1/pt8.jpg"></div>
+    <div data-index="8"><img src="images/chem1/pt9.jpg"></div>
+    <div data-index="9"><img src="images/chem1/pt10.jpg"></div>
+  </div>
+  <div>
+    <div id="question3" class="question"></div>
+    <div id="options3" class="options"></div>
+    <button onclick="check3()">Тексеру</button>
+    <button onclick="next3()" id="nextBtn3" disabled>Келесі</button>
+    <p id="result3"></p>
+  </div>
+</div>
+<div id="score3"></div>
+<button onclick="openPage('chem')">← Артқа</button>
+</section>
+
+<section id="chem2">
+<h2>Периодтық жүйенің құрылымы</h2>
+<div class="quiz-container">
+  <div class="puzzle" id="puzzle4">
+    <div data-index="0"><img src="images/chem2/pto1.jpg"></div>
+    <div data-index="1"><img src="images/chem2/pto2.jpg"></div>
+    <div data-index="2"><img src="images/chem2/pto3.jpg"></div>
+    <div data-index="3"><img src="images/chem2/pto4.jpg"></div>
+    <div data-index="4"><img src="images/chem2/pto5.jpg"></div>
+    <div data-index="5"><img src="images/chem2/pto6.jpg"></div>
+    <div data-index="6"><img src="images/chem2/pto7.jpg"></div>
+    <div data-index="7"><img src="images/chem2/pto8.jpg"></div>
+    <div data-index="8"><img src="images/chem2/pto9.jpg"></div>
+    <div data-index="9"><img src="images/chem2/pto10.jpg"></div>
+  </div>
+  <div>
+    <div id="question4" class="question"></div>
+    <div id="options4" class="options"></div>
+    <button onclick="check4()">Тексеру</button>
+    <button onclick="next4()" id="nextBtn4" disabled>Келесі</button>
+    <p id="result4"></p>
+  </div>
+</div>
+<div id="score4"></div>
+<button onclick="openPage('chem')">← Артқа</button>
+</section>
+
+<script>
+function openPage(id){
+  document.querySelectorAll("section").forEach(s=>s.style.display="none");
+  document.getElementById(id).style.display="block";
+  if(id==='bio1') resetQuiz1();
+  if(id==='bio2') resetQuiz2();
+  if(id==='chem1') resetQuiz3();
+  if(id==='chem2') resetQuiz4();
+}
+
+function createQuiz(quizId, questions, puzzleId){
+  let state = {i:0, wrong:[], completed:[], phase:'first'};
+
+  function load(){
+    if(state.phase==='first' && state.i>=questions.length){
+      if(state.wrong.length>0){
+        state.phase='review';
+        state.i = state.wrong.shift();
+        alert("Қате жауаптарды қайталаңыз");
+      } else { finish(); return; }
+    }
+    if(state.phase==='review'){
+      if(state.i===undefined || state.i===null){ state.i = state.wrong.shift(); }
+      if(state.i===undefined){ finish(); return; }
+    }
+
+    document.getElementById('question'+quizId).innerText = questions[state.i].q;
+    let html='';
+    const letters = ["A","B","C","D"];
+
+    questions[state.i].o.forEach((opt,index)=>{
+        html+=`<label>
+            <input type="radio" name="a${quizId}" value="${index}">
+            ${letters[index]}) ${opt}
+            </label>`;
+        });
+
+    document.getElementById('options'+quizId).innerHTML = html;
+    document.getElementById('nextBtn'+quizId).disabled = true;
+  }
+
+  function check(){
+    let sel = document.querySelector(`input[name=a${quizId}]:checked`);
+    if(!sel){ alert("Жауапты таңда!"); return; }
+    let val = +sel.value;
+    let labels = document.querySelectorAll(`#options${quizId} label`);
+    labels.forEach(l=>l.classList.remove('correct','wrong'));
+
+    if(val===questions[state.i].c){
+      labels[val].classList.add('correct');
+      let img = document.querySelector(`#${puzzleId} div[data-index="${state.i}"] img`);
+      if(img) img.style.display='block';
+      if(!state.completed.includes(state.i)) state.completed.push(state.i);
+      state.wrong = state.wrong.filter(x=>x!==state.i);
+    } else {
+      labels[val].classList.add('wrong');
+      if(state.phase==='first' && !state.wrong.includes(state.i)) state.wrong.push(state.i);
+    }
+
+    document.getElementById('nextBtn'+quizId).disabled=false;
+  }
+
+  function next(){
+    if(state.phase==='first'){
+      state.i++;
+      load();
+    } else if(state.phase==='review'){
+      
+      if(state.wrong.length>0){
+        state.i = state.wrong.shift();
+        load();
+      } else {
+        finish();
+      }
+    }
+  }
+
+  function finish(){
+
+    let scoreText = `🎉 Тест аяқталды! Дұрыс жауаптар: ${state.completed.length}/${questions.length}`;
+
+    localStorage.setItem('quizScore', scoreText);
+
+    window.location.href = 'result.html';
+}
+
+
+  function reset(){
+    state.i=0; state.wrong=[]; state.completed=[]; state.phase='first';
+    document.querySelectorAll(`#${puzzleId} img`).forEach(img=>img.style.display='none');
+    document.getElementById('score'+quizId).style.display='none';
+    load();
+  }
+
+  return {load, check, next, reset};
+}
+
+
+const quiz1=createQuiz(1,
+[{q:"1. Жүйке жүйесінің бөлімдерін дұрыс анықта:",o:["Орталық – жүйкелер мен түйіндер, Шеткі – ми мен жұлын","Орталық – ми мен жұлын, Шеткі – жүйкелер мен түйіндер","Орталық – тек жұлын, Шеткі – ми","Орталық – түйіндер, Шеткі – жұлын"],c:1},
+{q:"2. Жұлын қай жүйке жүйесіне жатады?",o:["Шеткі","Вегетативті","Орталық","Сезімтал"],c:2},
+{q:"3. Жұлынның негізгі қызметі қандай?",o:["Ойлау және есте сақтау","Ас қорыту","Рефлекстік және өткізгіштік","Сөйлеу"],c:2},
+{q:"4. Жұлын қандай қызметтерді атқарады?",o:["Қорғаныш және ас қорыту","Рефлекстік және өткізгіштік","Ойлау және сөйлеу","Тыныс алу және қан айналым"],c:1},
+{q:"5. Жұлынның ақ затының қызметі қандай?",o:["Рефлекс орталығы","Жүйке импульстарын өткізу","Қорғау","Сезім мүшелерін басқару"],c:1},
+{q:"6. Жұлын қай жерде орналасқан?",o:["Бас сүйек ішінде","Кеуде қуысында","Омыртқа өзегінде","Жамбас қуысында"],c:2},
+{q:"7. Қайсысы жұлынға тән емес?",o:["Рефлекс","Импульс өткізу","Ойлау","Сезімталдық"],c:2},
+{q:"8. Жұлынның сұр заты қай жерде орналасады?",o:["Сыртында","Ішкі бөлігінде","Тек артқы жағында","Жүйкелерде"],c:1},
+{q:"9. Рефлекс доғасының дұрыс реті қайсы?",o:["Рецептор → қозғалтқыш нейрон → сезгіш нейрон → бұлшықет","Рецептор → сезгіш нейрон → қозғалтқыш нейрон → бұлшықет","Рецептор → ми → жұлын → бұлшықет","Рецептор → жұлын → ми → бұлшықет"],c:1},
+{q:"10. Жұлын зақымданса, ең алдымен қай қызмет бұзылады?",o:["Есте сақтау","Ойлау","Қозғалыс және сезімталдық","Сөйлеу"],c:2}], 'puzzle1');
+
+const quiz2=createQuiz(2,
+[{q:"1. Рефлекс дегеніміз не?",o:["Адамның ойлау қабілеті","Ағзаның сыртқы немесе ішкі тітіркендіргішке жауап реакциясы","Тек саналы әрекет","Бұлшықет жұмысы"],c:1},
+{q:"2. Рефлекстерді зерттейтін ғылым саласы қалай аталады?",o:["Генетика","Анатомия","Физиология","Биология"],c:2},
+{q:"3. Рефлекс доғасының бірінші бөлімі:",o:["Орталық жүйке жүйесі","Рецептор","Атқарушы мүше","Сезгіш нейрон"],c:1},
+{q:"4. Рефлекс доғасында қозуды орталыққа жеткізетін нейрон:",o:["Қозғалтқыш нейрон","Аралық нейрон","Сезгіш нейрон","Атқарушы мүше"],c:2},
+{q:"5. Жұлын мен ми қандай бөлімге жатады?",o:["Шеткі жүйке жүйесі","Орталық жүйке жүйесі","Вегетативті жүйке жүйесі","Соматикалық жүйке жүйесі"],c:1},
+{q:"6. Рефлекс доғасының соңғы бөлімі:",o:["Рецептор","Сезгіш нейрон","Атқарушы мүше","Аралық нейрон"],c:2},
+{q:"7. Адамдағы туа біткен рефлекстер қалай аталады?",o:["Шартты","Шартсыз","Жасанды","Жүре пайда болған"],c:1},
+{q:"8. Шартты рефлекстердің қалыптасуы немен байланысты?",o:["Тұқым қуалаушылық","Жаттығумен және тәжірибемен","Жас ерекшелікпен","Ішкі мүшелермен"],c:1},
+{q:"9. Қандай мүше атқарушы мүше болып табылады?",o:["Жүйке","Ми","Бұлшықет немесе без","Рецептор"],c:2},
+{q:"10. Рефлекс доғасының негізгі қызметі:",o:["Ойлау","Қозғалыс жасау","Ағзаның тез жауап беруін қамтамасыз ету","Ақпарат сақтау"],c:2}], 'puzzle2');
+
+const quiz3=createQuiz(3,
+[
+{q:"1. Табиғи топтарға бірігетін химиялық элементтерді таңда:",o:["Сілтілік металдар","Галогендер","Инертті газдар","Барлығы дұрыс"],c:3},
+
+{q:"2. Сілтілік металдардың сыртқы қабатындағы электрон саны:",o:["1","2","7","8"],c:0},
+
+{q:"3. Сөздерден дұрыс сөйлем құрастыр:",o:[
+"Галогендер – белсенді бейметалдар",
+"Бейметалдар – галогендер белсенді",
+"Белсенді – галогендер бейметалдар",
+"Галогендер – металл элементтер"
+],c:0},
+
+{q:"4. Қай элементтер инертті газдарға жатады?",o:["He, Ne, Ar","O, N, H","Na, K, Li","Cl, F, Br"],c:0},
+
+{q:"5. Сәйкестендір:",o:[
+"Сілтілік металдар → сумен тез әрекеттеседі",
+"Галогендер → өте белсенді бейметалдар",
+"Инертті газдар → химиялық белсенділігі төмен",
+"Барлығы дұрыс"
+],c:3},
+
+{q:"6. Галогендерге тән қасиет:",o:["Электрон береді","Электрон қосып алады","Мүлде реакцияға түспейді","Металл қасиет көрсетеді"],c:1},
+
+{q:"7. Артық сөзді тап (сілтілік металдар):",o:["Натрий","Калий","Кальций","Литий"],c:2},
+
+{q:"8. Инертті газдардың қолданылуының бірін көрсет:",o:["Тыңайтқыш жасау","Лампаларды толтыру","Отын ретінде","Ас тұзы құрамында"],c:1},
+
+{q:"9. Қай табиғи топ ең белсенді металдар болып саналады?",o:["Сілтілік металдар","Сілтілік-жер металдар","Галогендер","Инертті газдар"],c:0},
+
+{q:"10. Табиғи топтарға біріктіру нені түсіндіреді?",o:["Элементтердің түсін","Қасиеттерінің ұқсастығын","Атом массасын","Табиғатта таралуын"],c:1}
+],
+'puzzle3');
+
+const quiz4=createQuiz(4,
+[
+{q:"1. Периодтық жүйені ашқан ғалым кім?",o:["А. Лавуазье","Д. И. Менделеев","Н. Бор","М. Фарадей"],c:1},
+
+{q:"2. Периодтық жүйеде неше период бар?",o:["5","6","7","8"],c:2},
+
+{q:"3. Периодтық жүйеде неше топ бар?",o:["8","10","18","20"],c:2},
+
+{q:"4. Сөздерден дұрыс сөйлем құрастыр:",o:[
+"Период – элементтердің көлденең орналасуы",
+"Элементтер – периодта тік орналасады",
+"Период – тік бағана",
+"Период – химиялық топ"
+],c:0},
+
+{q:"5. Топ дегеніміз не?",o:["Көлденең қатар","Тік бағана","Элементтер жиыны","Металдар қатары"],c:1},
+
+{q:"6. Бір периодта орналасқан элементтерге ортақ белгі:",o:["Электрон қабатының саны бірдей","Валенттілігі бірдей","Химиялық қасиеті бірдей","Атомдық массасы бірдей"],c:0},
+
+{q:"7. Артық сөзді тап (период):",o:["1-период","2-период","3-период","А-топ"],c:3},
+
+{q:"8. Периодтық жүйеде элементтер қалай орналасады?",o:["Кему ретімен","Алфавит бойынша","Атомдық нөмірінің өсу ретімен","Тығыздығына қарай"],c:2},
+
+{q:"9. Қай элемент 1-топқа жатады?",o:["Na","O","Cl","Ne"],c:0},
+
+{q:"10. Периодтық жүйенің құрылымы нені болжауға мүмкіндік береді?",o:["Элементтің бағасын","Қасиеттерін және реакцияға түсу қабілетін","Табиғатта таралуын","Ашылу жылын"],c:1}
+],
+'puzzle4');
+
+function load1(){quiz1.load();} function check1(){quiz1.check();} function next1(){quiz1.next();} function resetQuiz1(){quiz1.reset();}
+function load2(){quiz2.load();} function check2(){quiz2.check();} function next2(){quiz2.next();} function resetQuiz2(){quiz2.reset();}
+function load3(){quiz3.load();} function check3(){quiz3.check();} function next3(){quiz3.next();} function resetQuiz3(){quiz3.reset();}
+function load4(){quiz4.load();} function check4(){quiz4.check();} function next4(){quiz4.next();} function resetQuiz4(){quiz4.reset();}
+
+
+openPage('home');
+</script>
+
+</body>
+</html>

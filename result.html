@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<title>Нәтиже</title>
+<style>
+body { font-family:'Roboto', Arial, sans-serif; background:#f4f8f6; text-align:center; padding:100px; }
+h1 { font-size:48px; margin-bottom:50px; }
+p { font-size:36px; color:#2e8b57; font-weight:bold; }
+button { padding:15px 30px; font-size:24px; font-weight:bold; border:none; border-radius:10px; background:#2e8b57; color:white; cursor:pointer; }
+button:hover { background:#246b45; }
+</style>
+</head>
+<body>
+<h1>Тест аяқталды!</h1>
+<p id="score"></p>
+<button onclick="goHome()">← Басты бетке</button>
+
+<script>
+document.getElementById('score').innerText = localStorage.getItem('quizScore') || "Нәтиже жоқ";
+
+function goHome(){
+    window.location.href = 'index.html'; // если твой основной файл index.html
+}
+</script>
+</body>
+</html>
