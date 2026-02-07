@@ -67,6 +67,20 @@ section button{ width:400px; max-width:90%; display:block; margin:10px auto; pad
 </div>
 </div>
 </section>
+<footer style="
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+text-align:center;
+color:#666;
+font-size:16px;
+background:#f4f8f6;
+padding:10px 0;
+box-shadow:0 -2px 5px rgba(0,0,0,0.1);
+">
+© 2026 • Author: Omirali Zhaniya
+</footer>
 
 <section id="bio">
 <h2>Биология тақырыптары</h2>
@@ -189,9 +203,6 @@ section button{ width:400px; max-width:90%; display:block; margin:10px auto; pad
 <div id="score4"></div>
 <button onclick="openPage('chem')">← Артқа</button>
 </section>
-<footer style="margin-top:60px;text-align:center;color:#666;font-size:16px;">
-© 2026 • Author: Omirali Zhaniya
-</footer>
 <script>
 function openPage(id){
   document.querySelectorAll("section").forEach(s=>s.style.display="none");
