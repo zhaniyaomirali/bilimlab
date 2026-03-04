@@ -46,6 +46,8 @@ section button{ width:400px; max-width:90%; display:block; margin:10px auto; pad
 .quiz-container > div:nth-child(2) {
     text-align: left; 
 }
+
+
 #score1,#score2,#score3,#score4{ font-size:30px; text-align:center; margin-top:40px; display:none; }
 </style>
 </head>
@@ -82,12 +84,17 @@ box-shadow:0 -2px 5px rgba(0,0,0,0.1);
 © 2026 • Author: Omirali Zhaniya
 </footer>
 
+
 <section id="bio">
 <h2>Биология тақырыптары</h2>
 <button onclick="openPage('bio1')">1. Жүйке жүйесінің бөлімдері. Жұлын</button>
 <button onclick="openPage('bio2')">2. Рефлекс және рефлекс доғасы</button>
+<button onclick="window.location.href='bio3.html'">
+3. Ұйқы гигиенасы және жұмысқа қабілеттілік
+</button>
 <button onclick="openPage('home')">← Артқа</button>
 </section>
+
 
 <section id="bio1">
 <h2>Жүйке жүйесінің бөлімдері. Жұлын</h2>
@@ -203,6 +210,7 @@ box-shadow:0 -2px 5px rgba(0,0,0,0.1);
 <div id="score4"></div>
 <button onclick="openPage('chem')">← Артқа</button>
 </section>
+
 <script>
 function openPage(id){
   document.querySelectorAll("section").forEach(s=>s.style.display="none");
