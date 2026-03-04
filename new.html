@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<title>Тапсырмалар</title>
+<style>
+body{
+  font-family:Arial;
+  background:#f4f8f6;
+  padding:40px;
+}
+.container{
+  max-width:800px;
+  margin:auto;
+}
+.question{
+  font-size:22px;
+  margin-bottom:20px;
+}
+input{
+  width:100%;
+  padding:10px;
+  font-size:18px;
+  margin-bottom:20px;
+}
+button{
+  padding:10px 20px;
+  font-size:18px;
+  background:#2e8b57;
+  color:white;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  margin-right:10px;
+}
+.result{
+  font-weight:bold;
+  margin-top:10px;
+  font-size:20px;
+}
+select{
+  font-size:18px;
+  padding:5px;
+}
+table{
+  border-collapse: collapse;
+  width: 100%;
+}
+table, th, td{
+  border: 1px solid black;
+}
+th, td{
+  padding: 15px;
+  text-align: center;
+  font-size: 20px;
+}
+</style>
+</head>
+<body>
+
+<div class="container" id="container">
+<h2>Сөйлемді Толықтыр (10 ұпай)</h2>
+<div id="quiz"></div>
+<button onclick="checkAnswer()">Тексеру</button>
+<button onclick="nextQuestion()">Келесі</button>
+<p class="result" id="result"></p>
+</div>
+
+<script>
+let current = 0;
+let score = 0;
+
+const questions = [
+{q:"1. Ұйқының жетіспеушілігі _____________ және концентрацияның төмендеуіне әкеледі.", a:"шаршаудың"},
+{q:"2. Ағзадағы ұйқы мен ояу кезеңдерін реттейтін басты гормон – ____________________ деп аталады.", a:"мелатонин"},
+{q:"3. Салауатты ұйқы гигиенасының маңызды бөлігі – күнделікті бір мезгілде _______________ жату және тұру.", a:"тұрақты"},
+{q:"4. Ұйқының ең терең кезеңі – _____________ ұйқы.", a:"баяу толқынды"},
+{q:"5. Ұйықтар алдында _____________ экрандарынан шығатын көк сәулелер мелатонин өндірісін тежейді.", a:"электронды құрылғылардың"},
+{q:"6. 7-сынып оқушыларының тәуліктік ұйқы ұзақтығы орта есеппен _______________ сағат.", a:"9-11"},
+{q:"7. Ұйқы – бұл мидың қабылдаған _______________ бекітетін уақыты.", a:"ақпаратты"},
+{q:"8. Жұмысқа қабілеттіліктің жоғары болуы _______________ сапасына байланысты.", a:"сапалы ұйқының"},
+{q:"9. Ұйықтар алдында _____________ оқу ұйқыны жеңілдетеді.", a:"кітап"},
+{q:"10. Ұйқы кезінде ағза өз күшін __________, иммундық жүйесін нығайтады.", a:"қалпына келтіреді"}
+];
+
+function loadQuestion(){
+  document.getElementById("quiz").innerHTML = `
+    <div class="question">${questions[current].q}</div>
+    <input type="text" id="answer">
+  `;
+  document.getElementById("result").innerText="";
+}
+
+function checkAnswer(){
+  let input = document.getElementById("answer");
+  let userAnswer = input.value.toLowerCase().trim();
+  let correct = questions[current].a.toLowerCase();
+
+  if(userAnswer === correct){
+    document.getElementById("result").innerText="✅ Дұрыс!";
+    document.getElementById("result").style.color="green";
+    input.style.backgroundColor="#4ac84e";
+  }else{
+    document.getElementById("result").innerText="❌ Қате!";
+    document.getElementById("result").style.color="red";
+    input.style.backgroundColor="#f14e5e";
+  }
+  input.disabled = true;
+}
+
+function nextQuestion(){
+  let input = document.getElementById("answer");
+  let userAnswer = input.value.toLowerCase().trim();
+  let correct = questions[current].a.toLowerCase();
+  if(userAnswer === correct){
+    score++;
+  }
+  current++;
+  if(current < questions.length){
+    loadQuestion();
+  }else{
+    document.getElementById("container").innerHTML = `<h2>Сөйлемді Толықтыр (10 ұпай)</h2>
+      <h3>Нәтиже: ${score} / 10</h3>
+      <button onclick="loadTask2()">Келесі тапсырма</button>`;
+  }
+}
+
+loadQuestion();
+
+// ------------------ Task2 ------------------
+const task2 = [
+{q:"1. Ұйқы – бұл мидың толық өшірілуі.", a:"ЖОҚ"},
+{q:"2. Ұйқының жетіспеушілігі көңіл-күйге және зейінге кері әсер етеді.", a:"ИӘ"},
+{q:"3. Ұйықтар алдында белсенді спорт ұйқыны тереңдетеді.", a:"ЖОҚ"},
+{q:"4. Циркадтық ритмдер ұйықтау уақытын реттейді.", a:"ИӘ"},
+{q:"5. Төсекте телефон қарау сапалы ұйқыға кепіл.", a:"ЖОҚ"},
+{q:"6. 7-сынып оқушыларына 8-9 сағат жеткілікті.", a:"ЖОҚ"},
+{q:"7. Ұйқы кезінде ағза қалпына келеді.", a:"ИӘ"},
+{q:"8. Кофеин ұйқы сапасын арттырады.", a:"ЖОҚ"},
+{q:"9. REM фазасы физикалық қалпына келуге бағытталған.", a:"ЖОҚ"},
+{q:"10. Ұйқының жеткіліксіздігі өнімділікті арттырады.", a:"ЖОҚ"}
+];
+
+function loadTask2(){
+  let table = `<h2 style="font-size:36px;">2-тапсырма: ИӘ / ЖОҚ</h2>
+  <table>
+  <tr><th>№</th><th>Тұжырым</th><th>Жауап</th></tr>`;
+
+  task2.forEach((item,index)=>{
+    table += `<tr>
+      <td>${index+1}</td>
+      <td style="text-align:left">${item.q}</td>
+      <td>
+        <select id="t2_${index}">
+          <option value="">Таңдаңыз</option>
+          <option value="ИӘ">ИӘ</option>
+          <option value="ЖОҚ">ЖОҚ</option>
+        </select>
+      </td>
+    </tr>`;
+  });
+
+  table += `</table><br>
+  <button onclick="checkTask2()">Тексеру</button>
+  <button onclick="finishTask2()">Келесі</button>
+  <p id="task2Result"></p>`;
+
+  document.getElementById("container").innerHTML = table;
+}
+
+function checkTask2(){
+  let task2Score = 0;
+
+  task2.forEach((item,index)=>{
+    let user = document.getElementById(`t2_${index}`).value;
+    let cell = document.getElementById(`t2_${index}`);
+    if(user === item.a){
+      task2Score++;
+      cell.style.backgroundColor="#4ac84e";
+    }else{
+      cell.style.backgroundColor="#f14e5e";
+    }
+  });
+
+  document.getElementById("task2Result").innerHTML =
+    `<h3>Нәтиже: ${task2Score} / ${task2.length}</h3>`;
+}
+
+function finishTask2(){
+  document.querySelector(".container").innerHTML = `
+    <h2>Барлық тапсырмалар аяқталды!</h2>
+    <button onclick="window.location.href='index.html'">Басты бетке өту</button>
+  `;
+}
+</script>
+
+</body>
+</html>
