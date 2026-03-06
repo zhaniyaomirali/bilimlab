@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<title>Химия тапсырмалары</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background: #f4f8f6;
+    padding: 40px;
+}
+
+.container{
+    max-width: 900px;
+    margin: auto;
+}
+
+button{
+    padding: 12px 25px;
+    font-size: 18px;
+    background: #2e8b57;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+table{
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+}
+
+table, th, td{
+    border: 1px solid black;
+}
+
+th, td{
+    padding: 15px;
+    text-align: center;
+    font-size: 20px;
+}
+
+select{
+    font-size: 20px;
+    padding: 8px;
+    font-weight: bold;
+}
+
+.result{
+    font-size: 26px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.correct{
+    background: #6bdb6f !important;
+}
+
+.wrong{
+    background: #ff6b6b !important;
+}
+
+p.question-text{
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+label{
+    padding: 8px 12px;
+    display: block;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    font-size: 22px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+label.correct-answer{
+    background-color: #6bdb6f;
+}
+
+label.wrong-answer{
+    background-color: #ff6b6b;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="container">
+
+<h2>1-тапсырма: Сәйкестендіру</h2>
+
+<table>
+<tr>
+<th>№</th>
+<th>Химиялық формула</th>
+<th>Мәні</th>
+</tr>
+
+<script>
+const formulas = ["H₂O","CO₂","O₃","NH₃","H₂SO₄","CH₄","CaCO₃","NaCl","C₂H₅OH","O₂"];
+const options = ["18","44","48","17","98","16","100","58.5","46","32"];
+
+for(let i=0;i<10;i++){
+    document.write(`
+    <tr>
+        <td>${i+1}</td>
+        <td style="font-weight:bold; font-size:22px;">${formulas[i]}</td>
+        <td>
+            <select id="m${i}">
+                <option value="">Таңдаңыз</option>
+                ${options.map(o=>`<option value="${o}" style="font-weight:bold;">${o}</option>`).join("")}
+            </select>
+        </td>
+    </tr>
+    `)
+}
+</script>
+
+</table>
+
+<button onclick="checkMatch()">Тексеру</button>
+<button onclick="loadTask2()">Келесі</button>
+
+<p class="result" id="matchResult"></p>
+
+</div>
+
+<script>
+const correctMatch = ["18","44","48","17","98","16","100","58.5","46","32"];
+
+function checkMatch(){
+    let score = 0;
+    correctMatch.forEach((ans,i)=>{
+        let select = document.getElementById("m"+i);
+        select.classList.remove("correct","wrong");
+        if(select.value === ans){
+            select.classList.add("correct");
+            score++;
+        } else if(select.value !== ""){
+            select.classList.add("wrong");
+        }
+    });
+    document.getElementById("matchResult").innerHTML = "Нәтиже: " + score + " / 10";
+}
+
+function loadTask2(){
+    document.getElementById("container").innerHTML=`
+    <h2>2-тапсырма: Есептеу тапсырмалары</h2>
+
+    <p class="question-text">1. NaCl құрамындағы натрийдің массалық үлесі:</p>
+    <label><input type="radio" name="q1">50</label>
+    <label><input type="radio" name="q1" data-correct="true">39,32</label>
+    <label><input type="radio" name="q1">45,5</label>
+    <label><input type="radio" name="q1">60,68</label>
+
+    <p class="question-text">2. Су молекуласындағы оттегінің массалық үлесі:</p>
+    <label><input type="radio" name="q2">11,11</label>
+    <label><input type="radio" name="q2">50</label>
+    <label><input type="radio" name="q2" data-correct="true">88,89</label>
+    <label><input type="radio" name="q2">75</label>
+
+    <p class="question-text">3. CO₂ құрамындағы көміртегінің массалық үлесі:</p>
+    <label><input type="radio" name="q3">12</label>
+    <label><input type="radio" name="q3">54,55</label>
+    <label><input type="radio" name="q3" data-correct="true">27,27</label>
+    <label><input type="radio" name="q3">72,73</label>
+
+    <p class="question-text">4. NH₃ құрамындағы азоттың массалық үлесі:</p>
+    <label><input type="radio" name="q4">14</label>
+    <label><input type="radio" name="q4">85,9</label>
+    <label><input type="radio" name="q4" data-correct="true">82,35</label>
+    <label><input type="radio" name="q4">50</label>
+
+    <p class="question-text">5. CaCO₃ құрамындағы оттегінің массалық үлесі:</p>
+    <label><input type="radio" name="q5">16</label>
+    <label><input type="radio" name="q5">32</label>
+    <label><input type="radio" name="q5" data-correct="true">48</label>
+    <label><input type="radio" name="q5">64</label>
+
+    <button onclick="checkTask2()">Тексеру</button>
+    <button onclick="loadTask3()">Келесі</button>
+
+    <p id="task2Result" class="result"></p>
+    `;
+}
+
+function checkTask2(){
+    let score=0;
+    document.querySelectorAll("input[data-correct='true']").forEach(input=>{
+        const label = input.parentElement;
+        label.classList.remove("correct-answer","wrong-answer");
+        if(input.checked){
+            label.classList.add("correct-answer");
+            score++;
+        } else if(!input.checked){
+            const group = document.getElementsByName(input.name);
+            group.forEach(opt=>{
+                if(opt.checked && opt.dataset.correct !== "true"){
+                    opt.parentElement.classList.add("wrong-answer");
+                }
+            });
+        }
+    });
+    document.getElementById("task2Result").innerHTML= "Нәтиже: "+score+" / 5";
+}
+function loadTask3(){
+    document.getElementById("container").innerHTML=`
+    <h2>3-тапсырма: Массалық қатынас</h2>
+
+    <p class="question-text">1. H₂O затындағы элементтердің массалық қатынасы:</p>
+    <label><input type="radio" name="t1" data-correct="true">1 : 8</label>
+    <label><input type="radio" name="t1">2 : 16</label>
+    <label><input type="radio" name="t1">2 : 1</label>
+    <label><input type="radio" name="t1">1 : 16</label>
+
+    <p class="question-text">2. CO₂ затындағы массалық қатынас:</p>
+    <label><input type="radio" name="t2">12 : 32</label>
+    <label><input type="radio" name="t2" data-correct="true">3 : 8</label>
+    <label><input type="radio" name="t2">1 : 2</label>
+    <label><input type="radio" name="t2">12 : 16</label>
+
+    <p class="question-text">3. NH₃ затындағы массалық қатынас:</p>
+    <label><input type="radio" name="t3" data-correct="true">14 : 3</label>
+    <label><input type="radio" name="t3">1 : 3</label>
+    <label><input type="radio" name="t3">3 : 14</label>
+    <label><input type="radio" name="t3">14 : 1</label>
+
+    <p class="question-text">4. CaO затындағы массалық қатынас:</p>
+    <label><input type="radio" name="t4" data-correct="true">5 : 2</label>
+    <label><input type="radio" name="t4">40 : 16</label>
+    <label><input type="radio" name="t4">2 : 5</label>
+    <label><input type="radio" name="t4">1 : 1</label>
+
+    <p class="question-text">5. Al₂O₃ затындағы массалық қатынас:</p>
+    <label><input type="radio" name="t5">54 : 48</label>
+    <label><input type="radio" name="t5" data-correct="true">9 : 8</label>
+    <label><input type="radio" name="t5">3 : 2</label>
+    <label><input type="radio" name="t5">2 : 3</label>
+
+    <button onclick="checkTask3()">Тексеру</button>
+    <button onclick="finishAll()">Аяқтау</button>
+
+    <p id="task3Result" class="result"></p>
+    `;
+}
+
+function checkTask3(){
+    let score=0;
+    document.querySelectorAll("input[data-correct='true']").forEach(input=>{
+        const label = input.parentElement;
+        label.classList.remove("correct-answer","wrong-answer");
+        if(input.checked){
+            label.classList.add("correct-answer");
+            score++;
+        } else {
+            const group = document.getElementsByName(input.name);
+            group.forEach(opt=>{
+                if(opt.checked && opt.dataset.correct !== "true"){
+                    opt.parentElement.classList.add("wrong-answer");
+                }
+            });
+        }
+    });
+    document.getElementById("task3Result").innerHTML= "Нәтиже: "+score+" / 5";
+}
+</script>
+
+</body>
+</html>

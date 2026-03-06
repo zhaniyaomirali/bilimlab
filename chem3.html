@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<title>Салыстырмалы молекулалық масса</title>
+<button onclick="window.location.href='chemex.html'" 
+        style="position:fixed; top:30px; right:40px;">
+Аяқтау
+</button>
+<style>
+
+    
+body{
+  margin:0;
+  background:black;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  overflow:hidden;
+}
+
+img{
+  width:100vw;
+  height:100vh;
+  object-fit:contain;
+}
+
+.buttons{
+  position:fixed;
+  bottom:30px;
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  padding:0 40px;
+}
+
+button{
+  padding:15px 30px;
+  font-size:20px;
+  background:#2e8b57;
+  color:white;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+}
+</style>
+</head>
+<body>
+
+<img id="slideImg" src="images/chemslide/2026-03-05 19.41.59.jpg">
+
+
+<div class="buttons">
+  <button onclick="prevSlide()">← Артқа</button>
+  <button onclick="nextSlide()">Алға →</button>
+</div>
+
+<script>
+let currentSlide = 0;
+
+const slides = [
+  "images/chemslide/2026-03-05 19.41.59.jpg",
+  "images/chemslide/2026-03-05 19.42.05.jpg",
+  "images/chemslide/2026-03-05 19.42.10.jpg",
+  "images/chemslide/2026-03-05 19.42.15.jpg",
+  "images/chemslide/2026-03-05 19.42.27.jpg",
+  "images/chemslide/2026-03-05 19.42.46.jpg",
+  "images/chemslide/2026-03-05 19.42.53.jpg",
+  "images/chemslide/2026-03-05 19.42.57.jpg",
+  "images/chemslide/2026-03-05 19.43.01.jpg",
+  "images/chemslide/2026-03-05 19.43.05.jpg"
+
+];
+
+function nextSlide(){
+  currentSlide++;
+  if(currentSlide >= slides.length) currentSlide = 0;
+  document.getElementById("slideImg").src = slides[currentSlide];
+}
+
+function prevSlide(){
+  currentSlide--;
+  if(currentSlide < 0) currentSlide = slides.length - 1;
+  document.getElementById("slideImg").src = slides[currentSlide];
+}
+</script>
+
+</body>
+</html>
